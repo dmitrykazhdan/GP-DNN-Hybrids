@@ -4,7 +4,7 @@ import numpy as np
 
 
 
-def run_simple_example(x_train, y_train, x_test, adv_test, n_samples, n_features):
+def run_single_GPC(x_train, y_train, x_test, adv_test, n_samples, n_features):
 
     indices = np.arange(len(x_train))
     np.random.shuffle(indices)
@@ -22,12 +22,10 @@ def run_simple_example(x_train, y_train, x_test, adv_test, n_samples, n_features
 
     clean_pred, _ = gpc.predict_y(x_test)
     _, clean_var = gpc.predict_f(x_test)
-    clean_pred_vals = np.max(clean_pred, axis=1)
     clean_pred = np.argmax(clean_pred, axis=1)
 
     adv_pred, _ = gpc.predict_y(adv_test)
     _, adv_var = gpc.predict_f(adv_test)
-    adv_pred_vals = np.max(adv_pred, axis=1)
     adv_pred = np.argmax(adv_pred, axis=1)
 
     clean_pred_vars, adv_pred_vars = [], []

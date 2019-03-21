@@ -107,3 +107,24 @@ def train_GPC_models(n_models, n_samples, n_features, x_train, y_train):
 
     return models
 
+
+
+
+
+
+def run_ensembles(n_models, n_samples, n_features, max_var, x_train, y_train, x_test, adv_test, y_test):
+
+    gpc_ensemble = train_GPC_models(n_models=n_models, n_samples=n_samples, n_features=n_features,
+                                    x_train=x_train, y_train=y_train)
+
+    # Predict adverse test data labels
+    adv_p, adv_v = get_ensemble_predictions(models=gpc_ensemble, n_models=n_models,
+                                            max_var=max_var, test_samples=adv_test)
+
+
+    # Predict clean test data labels
+    clean_p, clean_v = get_ensemble_predictions(models=gpc_ensemble, n_models=n_models,
+                                                max_var=max_var, test_samples=x_test)
+
+
+    return clean_p, clean_v, adv_p, adv_v

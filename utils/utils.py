@@ -1,6 +1,7 @@
 import numpy as np
 from keras import backend as K
 import scipy.io
+from keras.datasets import mnist
 
 
 def load_NMNIST_test(file_path):
@@ -30,7 +31,7 @@ def load_NMNIST_test(file_path):
 
 
 
-def load_MNIST(file_path):
+def load_MNIST_data():
 
     # input image dimensions
     img_rows, img_cols = 28, 28
