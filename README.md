@@ -1,9 +1,11 @@
-# GP-DNN-Hybrids
+# Using Gaussian Processes for Deep Neural Network Predictive Uncertainty Estimation
 
-This projects explores a way of extracting uncertainty estimates from DNNs by combining them with Gaussian Process
-Classifiers, producing hybrid models. Results obtained from this project demonstrate that these hybrid models achieve
+This projects explores a way of extracting uncertainty estimates from Deep Neural Networks (DNNs) by combining them with Gaussian Process
+Classifiers (GPCs), producing hybrid models. Results obtained from this project demonstrate that these hybrid models achieve
 high predictive accuracy on normal samples, whilst reporting high uncertainty on noisy samples. Furthermore, this
 project demonstrates that uncertainty estimations of these hybrid models may be used for adversarial sample detection.
+
+Further details can be found in the corresponding [report](https://github.com/dmitrykazhdan/GP-DNN-Hybrids/blob/master/report.pdf).
 
 
 ## Setup
@@ -29,9 +31,15 @@ using the _mnist_cnn.py_ file, found [here](https://github.com/keras-team/keras/
 ## Usage
 
 - Create MNIST model, as specified in the previous section
-- Specify it's path in the _config.yml_ file
-- Optionally, download the NMNIST dataset (available [here](http://yann.lecun.com/exdb/mnist/))
-, and specify it's path in the _config.yml_ file
+- Specify it's path in the _config.yml_ file:
+```python
+model_name: "path-to-generated-model"
+```
+- Optionally, download the NMNIST dataset (available [here](http://yann.lecun.com/exdb/mnist/)), 
+and specify it's path in the _config.yml_ file:
+```python
+nmnist_path: "path-to-nmnist-dataset"
+```
 - Navigate into the repository directory
 - Run _main.py_:
 ```python
@@ -56,4 +64,5 @@ the MNIST and NMNIST datasets
 
 - main.py: file used for loading and running the GPC-DNN hybrid model
 
-
+- report.pdf: a corresponding project report, 
+discussing the relevant findings
