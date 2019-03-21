@@ -4,9 +4,11 @@ from keras.models import Model, load_model
 import numpy as np
 from keras import backend
 from utils.utils import load_MNIST_data, load_NMNIST_test
-from GP_models.single_GP import run_single_GPC
-from GP_models.ensemble_GP import run_ensembles
+from gpc_models.single_GP import run_single_GPC
+from gpc_models.ensemble_GP import run_ensembles
 from sample_generator.adv_sample_generator import get_DeepFool_samples, get_FGSM_samples, get_BIM_samples
+import yaml
+
 
 
 if (not os.environ.get('PYTHONHTTPSVERIFY', '') and
@@ -15,15 +17,15 @@ if (not os.environ.get('PYTHONHTTPSVERIFY', '') and
 
 
 
-model_path = '...'
 
-model_fname = model_path + 'mnist_model.h5'
+def run_GPC(test_data = "noisy", use_ensembles=False):
 
-nmnist_path = '...'
+    with open("config.yml", 'r') as ymlfile:
+        cfg = yaml.load(ymlfile)
 
+    model_name = cfg['model_name']
+    nmnist_path = cfg['nmnist_path']
 
-
-def run_GPC(model_name, test_data = "noisy", use_ensembles=False):
 
     # Load the CNN model
     backend.set_learning_phase(False)
@@ -132,7 +134,7 @@ def run_GPC(model_name, test_data = "noisy", use_ensembles=False):
         print("Misclassified: ", n_misclassified / n_incorrect)
 
 
-run_GPC(model_fname)
+run_GPC()
 
 
 
